@@ -42,7 +42,7 @@ export interface Station {
 }
 
 
-const baseURL = "http://xmlopen.rejseplanen.dk/bin/rest.exe";
+const baseURL = "https://xmlopen.rejseplanen.dk/bin/rest.exe";
 const staticParameters = "&format=json";
 
 export const getDepartures = async (stationId: number): Promise<DepartureBoardResponse> => {
