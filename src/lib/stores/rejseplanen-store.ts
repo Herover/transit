@@ -98,8 +98,14 @@ export const createRejseplanenTavle = (locationId: number) => {
       item.timeOfDeparture = planned;
       item.departureDelay = diff;
       if (!item.timeOfArrival) {
-        item.timeOfArrival = item.timeOfDeparture;
-        item.timeOfDeparture = item.timeOfDeparture + 1000*30;
+        if (item.type == "M") {
+          // Metro only has departure times
+          item.timeOfArrival = item.timeOfDeparture;
+          item.timeOfDeparture = item.timeOfDeparture + 1000*10;
+        } else {
+          // Assume others who only exists as departures have already arrived
+          item.timeOfArrival = Date.now() - 1;
+        }
       }
       if (item.timeOfArrival >= item.timeOfDeparture) {
         item.timeOfDeparture += 1000*30;
