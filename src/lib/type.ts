@@ -10,6 +10,7 @@ export interface Vehicle {
   cancelled: boolean,
   extra?: any,
   type: string,
+  line: string,
 
   track?: string,
 };

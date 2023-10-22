@@ -18,6 +18,7 @@ export interface ArrivalBoard {
 export interface BoardItem {
   name: string;
   type: string;
+  line: string;
   stop: string;
   time: string;
   date: string;

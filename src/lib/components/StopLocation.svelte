@@ -10,13 +10,13 @@
   export let vehicles: tVehicle[] = [];
   export let label: string = "";
   export let width: number = 4;
-  export let direction: number = 1;
   export let color = "#ffffff";
+  export let vehicleColor: ((v: tVehicle) => string);
 </script>
 
 {#each vehicles as vehicle (vehicle.id)}
   <Vehicle vehicle={vehicle}>
-    <Metro />
+    <Metro color={(() => vehicleColor(vehicle))()} />
   </Vehicle>
 {/each}
 

@@ -42,6 +42,7 @@ export const createRejseplanenTavle = (locationId: number) => {
           actualTimeOfDeparture: 0,
           cancelled: false,
           type: arrival.type,
+          line: arrival.line,
           extra: { arrival }
         }
         vehicles.push(item);
@@ -81,6 +82,7 @@ export const createRejseplanenTavle = (locationId: number) => {
           actualTimeOfDeparture: 0,
           cancelled: false,
           type: departure.type,
+          line: departure.line,
           extra: { departure },
         }
         vehicles.push(item);

@@ -9,14 +9,14 @@
 
   export let vehicle: tVehicle;
 
-  let position = tweened((vehicle.timeOfArrival - Date.now())/1000, {
-    duration: vehicle.timeOfArrival - Date.now(),
+  let position = tweened(1000, {
+    duration: 0,
     easing: cubicInOut,
   });
 
   let state: "UNKNOWN" | "APPROACHING" | "WAITING" | "LEAVING" = "UNKNOWN";
   const updateState = () => {
-    if (vehicle.actualTimeOfArrival > Date.now() && state == "UNKNOWN") {
+    if (vehicle.actualTimeOfArrival > Date.now() + 1000 * 10 && state == "UNKNOWN") {
       state = "APPROACHING";
       position.set(0, {
         duration: (vehicle.actualTimeOfArrival - Date.now()),
@@ -37,7 +37,7 @@
           easing: linear,
         });
       }
-      position.set(-100, {
+      position.set(-1000, {
         duration: 10000,
         easing: cubicIn,
       });
