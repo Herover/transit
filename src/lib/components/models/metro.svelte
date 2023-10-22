@@ -9,7 +9,7 @@ Command: npx @threlte/gltf@2.0.0 /home/rainbow/kode/transit/static/models/metro.
   import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core'
   import { useGltf } from '@threlte/extras'
 
-  type $$Props = Props<THREE.Group>
+  // type $$Props = Props<THREE.Group>
   type $$Events = Events<THREE.Group>
   type $$Slots = Slots<THREE.Group> & { fallback: {}; error: { error: any } }
 
@@ -27,9 +27,11 @@ Command: npx @threlte/gltf@2.0.0 /home/rainbow/kode/transit/static/models/metro.
   }
 
   const gltf = useGltf<GLTFResult>('/models/metro.glb')
-  
+
+  let skin2: THREE.MeshStandardMaterial
   $: if ($gltf) {
-    $gltf.materials.Skin.color.set(color);
+    skin2 = $gltf.materials.Skin.clone()
+    skin2.color.set(color)
   }
 
   const component = forwardEventHandlers()
@@ -39,10 +41,12 @@ Command: npx @threlte/gltf@2.0.0 /home/rainbow/kode/transit/static/models/metro.
   {#await gltf}
     <slot name="fallback" />
   {:then gltf}
-    <!-- <T.Mesh geometry={gltf.nodes.Cube.geometry} position={[0, 1, 2]}>
-        <T is={gltf.nodes.Cube.material} color={color}/>
-    </T.Mesh> -->
-    <T.Mesh geometry={gltf.nodes.Cube.geometry} material={gltf.materials.Skin} position={[0, 1, 0]} />
+    {#if skin2}
+      <T.Mesh geometry={gltf.nodes.Cube.geometry} position={[0, 1, 2]}>
+        <T is={skin2}/>
+      </T.Mesh>
+    {/if}
+    <!-- <T.Mesh geometry={gltf.nodes.Cube.geometry} material={gltf.materials.Skin} position={[0, 1, 0]} /> -->
   {:catch error}
     <slot name="error" {error} />
   {/await}

@@ -30,21 +30,29 @@
   const TYPES_TRAINS = ["S", "REG", "LYN", "IC"]; // Possibly incomplete
 
   const vehicleColor = (v: Vehicle) => {
-    console.log(v.line)
-    
-    if (v.line == "M1") {
-      console.log("M1");
+    if (v.line == "M1") {         // Metro
       return "#007F60";
     } else if (v.line == "M2") {
-      console.log("M2");
       return "#FEC20F";
     } else if (v.line == "M3") {
-      console.log("M3");
       return "#F8001F";
     } else if (v.line == "M4") {
-      console.log("M4");
       return "#00A0BE";
-    } else {
+    } else if (v.line == "A") {   // S-Tog
+      return "#15a4dd";
+    } else if (v.line == "B") {
+      return "#4baa47";
+    } else if (v.line == "Bx") {
+      return "#77c044";
+    } else if (v.line == "C") {
+      return "#f68620";
+    } else if (v.line == "E") {
+      return "#6b67af";
+    } else if (v.line == "F") {
+      return "#ffc225";
+    } else if (v.line == "H") {
+      return "#ef4236";
+  } else {                        // Other
       return "#ffffff";
     }
   }
@@ -58,13 +66,13 @@
       cameraDistance={200}
     >
       <T.Group position.y={-20}>
-        <T.Group label={"Spor 1"} position.x={6}>
+        <T.Group label={"Spor 1"} position.x={-6}>
           <StopLocation
             {vehicleColor}
             vehicles={visibleVehicles.filter(e => e.track == "1" && TYPES_TRAINS.includes(e.type))}
           />
         </T.Group>
-        <T.Group label={"Spor 2"} position.x={-6} direction={-1}>
+        <T.Group label={"Spor 2"} position.x={6} rotation.y={Math.PI}>
           <StopLocation
             {vehicleColor}
             vehicles={visibleVehicles.filter(e => e.track == "2" && TYPES_TRAINS.includes(e.type))}
@@ -76,7 +84,7 @@
             vehicles={visibleVehicles.filter(e => e.track == "3" && TYPES_TRAINS.includes(e.type))}
           />
         </T.Group>
-        <T.Group label={"Spor 4"} position.x={20} direction={-1}>
+        <T.Group label={"Spor 4"} position.x={20} rotation.y={Math.PI}>
           <StopLocation
             {vehicleColor}
             vehicles={visibleVehicles.filter(e => e.track == "4" && TYPES_TRAINS.includes(e.type))}
@@ -90,7 +98,7 @@
             vehicles={visibleVehicles.filter(e => e.track == "1" && e.type == "M")}
           />
         </T.Group>
-        <T.Group label={"Spor 2"} position.x={-6} direction={-1}>
+        <T.Group label={"Spor 2"} position.x={-6} rotation.y={Math.PI}>
           <StopLocation
             {vehicleColor}
             vehicles={visibleVehicles.filter(e => e.track == "2" && e.type == "M")}

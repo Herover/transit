@@ -6,6 +6,8 @@
   import { T } from '@threlte/core';
   import { HTML } from '@threlte/extras';
   import Metro from './models/metro.svelte';
+  import IC from './models/ic.svelte';
+  import STog from './models/s-tog.svelte';
 
   export let vehicles: tVehicle[] = [];
   export let label: string = "";
@@ -16,7 +18,13 @@
 
 {#each vehicles as vehicle (vehicle.id)}
   <Vehicle vehicle={vehicle}>
-    <Metro color={(() => vehicleColor(vehicle))()} />
+    {#if vehicle.type == "M"}
+      <Metro color={vehicleColor(vehicle)} />
+    {:else if (vehicle.type == "REG" || vehicle.type == "IC")}
+      <IC color={vehicleColor(vehicle)} />
+    {:else if vehicle.type == "S"}
+      <STog color={vehicleColor(vehicle)} />
+    {/if}
   </Vehicle>
 {/each}
 
